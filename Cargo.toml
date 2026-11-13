@@ -19,3 +19,6 @@ arbitrary = ["dep:arbitrary"]
 
 [dev-dependencies]
 serde_json = "1"
+
+[lints.clippy]
+missing_const_for_fn = "warn"

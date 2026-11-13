@@ -78,12 +78,12 @@
 
 //! # Features
 //!
-//! * `serialize`: `serde` support.
+//! * `serde`: `serde` support.
 //! * `arbitrary`: `arbitrary` support.
 #[cfg(feature = "arbitrary")]
 use arbitrary::Arbitrary;
-#[cfg(feature = "serialize")]
-use serde::{
+#[cfg(feature = "serde")]
+use ::serde::{
     ser::{SerializeSeq, Serializer},
     Deserialize, Serialize,
 };
@@ -142,9 +142,9 @@ macro_rules! nonempty {
 }
 
 /// Non-empty vector.
-#[cfg_attr(feature = "serialize", derive(Deserialize))]
+#[cfg_attr(feature = "serde", derive(Deserialize))]
 #[cfg_attr(feature = "arbitrary", derive(Arbitrary))]
-#[cfg_attr(feature = "serialize", serde(try_from = "Vec<T>"))]
+#[cfg_attr(feature = "serde", serde(try_from = "Vec<T>"))]
 #[derive(Clone, Debug, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub struct NonEmpty<T> {
     pub head: T,
@@ -153,7 +153,7 @@ pub struct NonEmpty<T> {
 
 // Nb. `Serialize` is implemented manually, as serde's `into` container attribute
 // requires a `T: Clone` bound which we'd like to avoid.
-#[cfg(feature = "serialize")]
+#[cfg(feature = "serde")]
 impl<T> Serialize for NonEmpty<T>
 where
     T: Serialize,
@@ -1071,8 +1071,8 @@ impl<T, const S: usize> From<[T; S]> for NonEmpty<T> {
     }
 }
 
-#[cfg(feature = "serialize")]
-pub mod serialize {
+#[cfg(feature = "serde")]
+pub mod serde {
     use core::{convert::TryFrom, fmt};
 
     use alloc::vec::Vec;
@@ -1256,8 +1256,8 @@ mod tests {
         assert_eq!(numbers, nonempty![1, 2, 3]);
     }
 
-    #[cfg(feature = "serialize")]
-    mod serialize {
+    #[cfg(feature = "serde")]
+    mod serde {
         use crate::NonEmpty;
         use alloc::boxed::Box;
         use serde::{Deserialize, Serialize};

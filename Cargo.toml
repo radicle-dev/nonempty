@@ -14,7 +14,7 @@ arbitrary = { features = ["derive"], optional = true, version = "1" }
 [features]
 default = ["std"]
 std = []
-serialize = ["dep:serde"]
+serialize = []
 
 [dev-dependencies]
 serde_json = "1"

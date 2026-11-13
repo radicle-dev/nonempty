@@ -419,7 +419,7 @@ impl<T> NonEmpty<T> {
     /// assert_eq!(l_iter.next(), Some(&58));
     /// assert_eq!(l_iter.next(), None);
     /// ```
-    pub fn iter(&self) -> Iter<T> {
+    pub fn iter(&self) -> Iter<'_, T> {
         Iter {
             head: Some(&self.head),
             tail: &self.tail,

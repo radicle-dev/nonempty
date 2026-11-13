@@ -129,11 +129,11 @@ pub mod __macro_support {
 /// ```
 #[macro_export]
 macro_rules! nonempty {
-    ($h:expr, $( $x:expr ),* $(,)?) => {{
+    ($h:expr_2021, $( $x:expr_2021 ),* $(,)?) => {{
         let tail = $crate::__macro_support::vec![$($x),*];
         $crate::NonEmpty { head: $h, tail }
     }};
-    ($h:expr) => {
+    ($h:expr_2021) => {
         $crate::NonEmpty {
             head: $h,
             tail: $crate::__macro_support::vec![],
